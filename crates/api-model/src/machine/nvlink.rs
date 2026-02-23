@@ -33,7 +33,7 @@ impl MachineNvLinkStatusObservation {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub struct MachineNvLinkGpuStatusObservation {
     pub gpu_id: String,
     pub partition_id: Option<NvLinkPartitionId>,
@@ -64,19 +64,6 @@ impl From<MachineNvLinkGpuStatusObservation> for rpc::forge::MachineNvLinkGpuSta
             device_instance: value.device_instance,
             domain_id: Some(value.domain_id),
             guid: value.guid,
-        }
-    }
-}
-
-impl Default for MachineNvLinkGpuStatusObservation {
-    fn default() -> Self {
-        Self {
-            gpu_id: "".to_string(),
-            partition_id: None,
-            logical_partition_id: None,
-            device_instance: 0,
-            domain_id: NvLinkDomainId::default(),
-            guid: 0,
         }
     }
 }
